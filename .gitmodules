@@ -1,0 +1,3 @@
+[submodule "python/PyAPNs"]
+	path = python/PyAPNs
+	url = https://github.com/djacobs/PyAPNs
