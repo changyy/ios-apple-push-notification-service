@@ -1,6 +1,6 @@
 <?php
-if($argc < 3)
-	die('Usage> '.basename(__FILE__). ' "/path/CertificateName.pem" "DeviceToken" "Message" '."\n");
+if($argc < 4)
+	die('Usage> '.basename(__FILE__). ' "/path/CertificateName.pem" "DeviceToken" "Message" "BadgeCount" '."\n");
 
 $ssl_ctx = stream_context_create();
 stream_context_set_option($ssl_ctx, 'ssl', 'local_cert', $argv[1]);
@@ -21,7 +21,8 @@ if( is_resource( $fp = stream_socket_client(
 		array(
 			'aps' => array(
 				'alert' => $argv[3].' @ '.date('Ymd H:i:s'),
-				'sound' => 'default'	
+				'sound' => 'default',
+				'badge' => (int)$argv[4]
 			)
 		)
 	);

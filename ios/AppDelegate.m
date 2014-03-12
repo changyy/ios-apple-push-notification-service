@@ -36,7 +36,8 @@
     }
     else
     {
-        //application.applicationIconBadgeNumber =[[[userInfo objectForKey:@"aps"] objectForKey: @"badge"] integerValue];
+	//NSInteger badgeNumber = [application applicationIconBadgeNumber];
+	//[application setApplicationIconBadgeNumber:++badgeNumber];
     }
 }
 
