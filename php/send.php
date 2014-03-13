@@ -33,7 +33,7 @@ if( is_resource( $fp = stream_socket_client(
 	// https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/LegacyFormat.html
 	//
 	// content: Command, Token length, deviceToken(binary), Payload length, Payload data
-	// Bytes  :       1,            2,                  32,              2,            n
+	// bytes  :       1,            2,                  32,              2,            n
 	//
 	$packed_data = 
 		// Command (Simple Notification Format)
