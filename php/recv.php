@@ -24,6 +24,11 @@ if( is_resource( $fp = stream_socket_client(
 		echo "Read: ".strlen($data)."\n";
 		if(strlen($data) == 6)
 		{
+			// The Feedback Service
+			// https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/CommunicatingWIthAPS.html#//apple_ref/doc/uid/TP40008194-CH101-SW3
+			// content: timestamp, token length, token
+			// bytes  :         4,            2,     n
+
 			// http://php.net/manual/en/function.pack.php
 
 			// 4 bytes

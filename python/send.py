@@ -70,7 +70,11 @@ try:
 	connection.sendall(chunk)
 	
 	print "Done"
-except OpenSSL.SSL.Error, e:
-	print e
+#except OpenSSL.SSL.Error, e:
+except Exception, e:
+	print "Exception:", e
+	print "Debug:"
+	print "$ openssl s_client -connect feedback.sandbox.push.apple.com:2196 -cert", args.cert, "-key", args.key
+	print "$ openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert", args.cert, "-key", args.key
 
 connection.close()
