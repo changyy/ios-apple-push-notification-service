@@ -22,14 +22,21 @@ if( is_resource( $fp = stream_socket_client(
 			'aps' => array(
 				'alert' => $argv[3].' @ '.date('Ymd H:i:s'),
 				'sound' => 'default',
-				'badge' => (int)$argv[4]
+				'badge' => $argc > 4 ? (int)$argv[4]: 0
 			)
 		)
 	);
 
-	echo "Payload:\n$payload\n\n";
+	echo "Payload:\n$payload\n";
 
+	// Simple Notification Format
+	// https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/LegacyFormat.html
+	//
+	// content: Command, Token length, deviceToken(binary), Payload length, Payload data
+	// Bytes  :       1,            2,                  32,              2,            n
+	//
 	$packed_data = 
+		// Command (Simple Notification Format)
 		chr(0)
 		// device token
 		. pack('n', 32) . pack('H*', $deviceToken)
