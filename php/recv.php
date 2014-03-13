@@ -21,18 +21,25 @@ if( is_resource( $fp = stream_socket_client(
 	while(!feof($fp))
 	{
 		$data = fread($fp, 4+2);
+		echo "Read: ".strlen($data)."\n";
 		if(strlen($data) == 6)
 		{
-			$debug_raw .= $data;
-
 			// http://php.net/manual/en/function.pack.php
+
+			// 4 bytes
 			$timestamp = unpack("n*", substr($data, 0, 4));
+			// 2 bytes
 			$token_length = unpack("n", substr($data, 4, 2));
-			$data = fread($fp, $token_length);
-			$token_hex = unpack("H*", $data);
+
+			// $token_length bytes
+			$token = fread($fp, $token_length);
+			echo "Read2: ".strlen($token)."\n";
+			$token_hex = unpack("H*", $token);
+
+			// result
 			echo "Timestamp: $timestamp\nToken_length: $token_length\nToken: $token_hex\n";
 
-			$debug_raw .= $data;
+			$debug_raw .= $data.$token;
 		}
 	}
 	if(!empty($debug_raw))
